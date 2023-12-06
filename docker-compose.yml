@@ -1,0 +1,29 @@
+#yanl nuevo lenguaje de configuración 
+version: '3.9'
+ #indicamos la versión 
+ services:
+  cochinito:
+   build: 
+   context: .
+   dockerfile: Dockerfile.dev 
+    #puerto-anfitrión:contenedor si quieres agregar un nuevo puerto lo puedes hacer abajo 
+   ports: 
+   - "3000:3000"
+    links: 
+    # el nombre del contenedor que queremos mapear en este caso 
+    - monguito
+
+volumes:
+- .:/home/app
+        monguito: 
+     image: mongo
+      #indicamos a que imagen debe crearse el contenedor (en este caso usamos mongo) 
+      ports: 
+      - "27017:27017"
+       environment: 
+       - MONGO_INITDB_ROOT_USERNAME=angelica 
+       - MONGO_INITDB_ROOT_PASSWORD=password
+volumes:
+- mongo-data: /data/db
+volumes:
+mongo-data
